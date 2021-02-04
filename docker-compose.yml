@@ -1,0 +1,13 @@
+version: "3"
+services:
+  app:
+    image: istandthon7/torrentscraper
+    container_name: torrentScraper
+    environment:
+      - TZ=Asia/Seoul
+      - LC_ALL=C.UTF-8
+    volumes:
+      - torrentScraperData:/torrentScraper
+
+volumes:
+  torrentScraperData:
