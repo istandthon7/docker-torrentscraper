@@ -9,7 +9,11 @@ RUN apt-get install -y nano git sudo
 WORKDIR /
 RUN git clone https://github.com/istandthon7/torrent_web_scraper.git
 WORKDIR /torrent_web_scraper
-RUN git checkout 1.1
-RUN ./install.sh
 
-VOLUME /torrent_web_scraper
+VOLUME /torrent_web_scraper/config
+VOLUME /torrent_web_scraper/transmission_script
+
+RUN ./install.sh
+COPY entrypoint.sh /usr/local/bin
+RUN ln -s usr/local/bin/docker-entrypoint.sh /
+ENTRYPOINT entrypoint.sh

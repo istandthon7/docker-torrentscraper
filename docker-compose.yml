@@ -1,0 +1,26 @@
+version: "2.2"
+services:
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Seoul
+    volumes:
+      - ./config:/config
+      - ./downloads:/downloads
+      - ./watch:/watch
+      - ./transmission_script:/transmission_script
+      - ./scraper_config:/transmission_script/config
+    ports:
+      - 9091:9091
+      - 51273:51273
+      - 51273:51273/udp
+    restart: unless-stopped
+    cpus: "0.5"
+  scraper:
+    image: istandthon7/torrentscraper
+    volumes:
+      - ./scraper_config:/torrent_web_scraper/config
+      - ./transmission_script:/torrent_web_scraper/transmission_script
