@@ -21,6 +21,8 @@ services:
     cpus: "0.5"
   scraper:
     image: istandthon7/torrentscraper
+    environment:
+      - TZ=Asia/Seoul
     volumes:
       - ./scraper_config:/torrent_web_scraper/config
       - ./transmission_script:/torrent_web_scraper/transmission_script

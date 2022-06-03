@@ -15,6 +15,5 @@ VOLUME /torrent_web_scraper/transmission_script
 
 RUN ./install.sh
 COPY update-exim4.conf.conf /etc/exim4
-COPY entrypoint.sh /usr/local/bin
-RUN ln -s usr/local/bin/docker-entrypoint.sh /
-ENTRYPOINT entrypoint.sh
+
+ENTRYPOINT ./torrent_web_scraper.py
