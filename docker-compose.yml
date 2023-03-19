@@ -1,28 +1,46 @@
+# fileVersion: 0.1
 version: "2.2"
 services:
   transmission:
     image: linuxserver/transmission
     container_name: transmission
     environment:
+      - TZ=Asia/Seoul
+      - LC_ALL=C.UTF-8
       - PUID=1000
       - PGID=1000
-      - TZ=Asia/Seoul
+      - USER=${ID}
+      - PASS=${PASS}
     volumes:
-      - ./config:/config
-      - ./downloads:/downloads
-      - ./watch:/watch
-      - ./transmission_script:/transmission_script
-      - ./scraper_config:/transmission_script/config
+      - ${DOWNLOADS}:/downloads
+    volumes_from:
+      - manager
     ports:
       - 9091:9091
-      - 51273:51273
-      - 51273:51273/udp
+      - 51413:51413
+      - 51413:51413/udp
     restart: unless-stopped
-    cpus: "0.5"
-  scraper:
+    cpus: 0.5
+    depends_on:
+      - manager
+  manager:
     image: istandthon7/torrentscraper
     environment:
       - TZ=Asia/Seoul
+      - LC_ALL=C.UTF-8
     volumes:
-      - ./scraper_config:/torrent_web_scraper/config
-      - ./transmission_script:/torrent_web_scraper/transmission_script
+      - ${VIDEO}:/tm/video
+    ports:
+      # 5005 포트를 변경할 수 있습니다.
+      - 5005:80
+    restart: unless-stopped
+   
+###########################################################
+## .env 파일
+# ID=트랜스미션_아이디
+# PASS=트랜스미션_비밀번호
+## 트랜스미션이 다운로드할 위치 (폴더 속성에서 전체 경로)
+# DOWNLOADS=/volume1/docker/transmission/downloads
+# 다운로드한 파일을 옮길 위치
+# VIDEO=/volume1/video
+###########################################################
