@@ -1,4 +1,4 @@
-# fileVersion: 0.1
+# fileVersion: 0.2
 version: "2.2"
 services:
   transmission:
