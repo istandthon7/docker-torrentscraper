@@ -1,9 +1,8 @@
-# fileVersion: 0.2
+# fileVersion: 0.3
 version: "2.2"
 services:
   transmission:
     image: linuxserver/transmission
-    container_name: transmission
     environment:
       - TZ=Asia/Seoul
       - LC_ALL=C.UTF-8
