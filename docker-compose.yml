@@ -1,4 +1,4 @@
-# fileVersion: 0.3
+# fileVersion: 0.4
 version: "2.2"
 services:
   transmission:
@@ -26,6 +26,7 @@ services:
     environment:
       - TZ=Asia/Seoul
       - LC_ALL=C.UTF-8
+      - VIDEO=${VIDEO}
     volumes:
       - ${VIDEO}:/tm/video
     ports:
