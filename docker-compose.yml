@@ -1,4 +1,4 @@
-# fileVersion: 0.5
+# fileVersion: 0.6
 version: "2.2"
 services:
   transmission:
@@ -28,6 +28,8 @@ services:
       - LC_ALL=C.UTF-8
       - VIDEO=${VIDEO}
       - DOWNLOADS=${DOWNLOADS}
+      - ID=${ID}
+      - PASS=${PASS}
     volumes:
       - ${VIDEO}:/tm/video
     ports:
