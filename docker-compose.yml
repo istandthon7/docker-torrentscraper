@@ -1,4 +1,4 @@
-# fileVersion: 0.6
+# fileVersion: 0.7
 version: "2.2"
 services:
   transmission:
@@ -30,8 +30,10 @@ services:
       - DOWNLOADS=${DOWNLOADS}
       - ID=${ID}
       - PASS=${PASS}
+      - CONFIG=${CONFIG}
     volumes:
       - ${VIDEO}:/tm/video
+      - ${CONFIG}:/scraper/config
     ports:
       - ${PORT}:80
     restart: unless-stopped
