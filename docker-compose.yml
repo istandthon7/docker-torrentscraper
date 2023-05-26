@@ -30,10 +30,11 @@ services:
       - DOWNLOADS=${DOWNLOADS}
       - ID=${ID}
       - PASS=${PASS}
-      - CONFIG=${CONFIG}
     volumes:
       - ${VIDEO}:/tm/video
-      - ${CONFIG}:/scraper/config
+      - torrent_manager:/scraper/config
     ports:
       - ${PORT}:80
     restart: unless-stopped
+volumes:
+  torrent_manager:
