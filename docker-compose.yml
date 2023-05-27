@@ -1,4 +1,4 @@
-# fileVersion: 0.6
+# fileVersion: 0.7
 version: "2.2"
 services:
   transmission:
@@ -32,6 +32,9 @@ services:
       - PASS=${PASS}
     volumes:
       - ${VIDEO}:/tm/video
+      - torrent_manager:/scraper/config
     ports:
       - ${PORT}:80
     restart: unless-stopped
+volumes:
+  torrent_manager:
