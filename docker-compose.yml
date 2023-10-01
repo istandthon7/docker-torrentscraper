@@ -1,23 +1,22 @@
-# fileVersion: 0.7
+# fileVersion: 0.1
 version: "2.2"
 services:
-  transmission:
-    image: linuxserver/transmission
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent
     environment:
       - TZ=Asia/Seoul
       - LC_ALL=C.UTF-8
       - PUID=1000
       - PGID=1000
-      - USER=${ID}
-      - PASS=${PASS}
+      - WEBUI_PORT=8080
     volumes:
       - ${DOWNLOADS}:/downloads
     volumes_from:
       - manager
     ports:
-      - 9091:9091
-      - 51413:51413
-      - 51413:51413/udp
+      - 8080:8080
+      - 6881:6881
+      - 6881:6881/udp
     restart: unless-stopped
     depends_on:
       - manager
@@ -28,8 +27,6 @@ services:
       - LC_ALL=C.UTF-8
       - VIDEO=${VIDEO}
       - DOWNLOADS=${DOWNLOADS}
-      - ID=${ID}
-      - PASS=${PASS}
     volumes:
       - ${VIDEO}:/tm/video
       - torrent_manager:/scraper/config
